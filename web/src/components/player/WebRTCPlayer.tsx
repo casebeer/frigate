@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 type WebRtcPlayerProps = {
   className?: string;
   camera: string;
+  width?: number,
+  height?: number,
   playbackEnabled?: boolean;
   audioEnabled?: boolean;
   volume?: number;
@@ -20,6 +22,8 @@ type WebRtcPlayerProps = {
 export default function WebRtcPlayer({
   className,
   camera,
+  width,
+  height,
   playbackEnabled = true,
   audioEnabled = false,
   volume,
@@ -198,6 +202,10 @@ export default function WebRtcPlayer({
     microphoneEnabled,
   ]);
 
+  // aspect ratio
+  const aspectRatio = (width && height) ? width / height : null;
+  const style = aspectRatio ? `aspect-ratio: ${aspectRatio};` : "";
+
   // ios compat
 
   const [iOSCompatControls, setiOSCompatControls] = useState(false);
@@ -316,6 +324,7 @@ export default function WebRtcPlayer({
     <video
       ref={videoRef}
       className={className}
+      style={style}
       controls={iOSCompatControls}
       autoPlay
       playsInline

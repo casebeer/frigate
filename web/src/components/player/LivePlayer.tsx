@@ -241,8 +241,10 @@ export default function LivePlayer({
     player = (
       <WebRtcPlayer
         key={"webrtc_" + key}
-        className={`size-full rounded-lg md:rounded-2xl ${liveReady ? "" : "hidden"}`}
+        className={`size-full rounded-lg md:rounded-2xl video-fill ${liveReady ? "" : "hidden"}`}
         camera={streamName}
+        width={cameraConfig.detect.width}
+        height={cameraConfig.detect.height}
         playbackEnabled={cameraActive || liveReady}
         getStats={showStats}
         setStats={setStats}
